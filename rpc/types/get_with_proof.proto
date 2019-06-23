@@ -108,14 +108,16 @@
 //      returned
 syntax = "proto3";
 
+option go_package = "github.com/philippgille/libra-sdk-go/rpc/types";
+
 package types;
 
-import "access_path.proto";
-import "account_state_blob.proto";
-import "events.proto";
-import "ledger_info.proto";
-import "transaction.proto";
-import "validator_change.proto";
+import "types/access_path.proto";
+import "types/account_state_blob.proto";
+import "types/events.proto";
+import "types/ledger_info.proto";
+import "types/transaction.proto";
+import "types/validator_change.proto";
 
 // -----------------------------------------------------------------------------
 // ---------------- Update to latest ledger request

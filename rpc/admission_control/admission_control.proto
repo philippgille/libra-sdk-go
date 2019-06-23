@@ -3,12 +3,14 @@
 
 syntax = "proto3";
 
+option go_package = "github.com/philippgille/libra-sdk-go/rpc/admission_control";
+
 package admission_control;
 
-import "get_with_proof.proto";
-import "mempool_status.proto";
-import "transaction.proto";
-import "vm_errors.proto";
+import "types/get_with_proof.proto";
+import "mempool/mempool_status.proto";
+import "types/transaction.proto";
+import "types/vm_errors.proto";
 
 // -----------------------------------------------------------------------------
 // ---------------- Submit transaction

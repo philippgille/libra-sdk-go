@@ -3,10 +3,12 @@
 
 syntax = "proto3";
 
+option go_package = "github.com/philippgille/libra-sdk-go/rpc/types";
+
 package types;
 
-import "events.proto";
-import "ledger_info.proto";
+import "types/events.proto";
+import "types/ledger_info.proto";
 
 // This is used to prove validator changes.  When a validator is changing, it
 // triggers an event on /validator_change_account/events/sent.  To tell the

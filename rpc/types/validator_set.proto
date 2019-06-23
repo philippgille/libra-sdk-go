@@ -3,9 +3,11 @@
 
 syntax = "proto3";
 
+option go_package = "github.com/philippgille/libra-sdk-go/rpc/types";
+
 package types;
 
-import "validator_public_keys.proto";
+import "types/validator_public_keys.proto";
 
 // Protobuf definition for the Rust struct ValidatorSet.
 message ValidatorSet {

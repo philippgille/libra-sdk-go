@@ -3,6 +3,8 @@
 
 syntax = "proto3";
 
+option go_package = "github.com/philippgille/libra-sdk-go/rpc/types";
+
 package types;
 
 // `TransactionInfo` is the object we store in the transaction accumulator. It

@@ -7,10 +7,12 @@
 
 syntax = "proto3";
 
+option go_package = "github.com/philippgille/libra-sdk-go/rpc/types";
+
 package types;
 
-import "access_path.proto";
-import "proof.proto";
+import "types/access_path.proto";
+import "types/proof.proto";
 
 // An event emitted from a smart contract
 message Event {

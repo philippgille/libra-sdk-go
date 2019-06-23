@@ -3,9 +3,11 @@
 
 syntax = "proto3";
 
+option go_package = "github.com/philippgille/libra-sdk-go/rpc/types";
+
 package types;
 
-import "transaction_info.proto";
+import "types/transaction_info.proto";
 
 message AccumulatorProof {
   // The bitmap indicating which siblings are default. 1 means non-default and

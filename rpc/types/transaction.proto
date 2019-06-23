@@ -3,12 +3,14 @@
 
 syntax = "proto3";
 
+option go_package = "github.com/philippgille/libra-sdk-go/rpc/types";
+
 package types;
 
-import "access_path.proto";
-import "events.proto";
-import "proof.proto";
-import "transaction_info.proto";
+import "types/access_path.proto";
+import "types/events.proto";
+import "types/proof.proto";
+import "types/transaction_info.proto";
 import "google/protobuf/wrappers.proto";
 
 // A generic structure that describes a transaction that a client submits

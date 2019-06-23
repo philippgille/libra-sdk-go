@@ -3,6 +3,8 @@
 
 syntax = "proto3";
 
+option go_package = "github.com/philippgille/libra-sdk-go/rpc/types";
+
 package types;
 
 // The statuses and errors produced by the VM can be categorized into a
