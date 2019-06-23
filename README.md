@@ -1,6 +1,8 @@
 libra-sdk-go
 ============
 
+[![GoDoc](https://godoc.org/github.com/philippgille/libra-sdk-go?status.svg)](https://godoc.org/github.com/philippgille/libra-sdk-go) [![Go Report Card](https://goreportcard.com/badge/github.com/philippgille/libra-sdk-go)](https://goreportcard.com/report/github.com/philippgille/libra-sdk-go)
+
 Go SDK for the Libra cryptocurrency
 
 > Note: This is work in progress! The API is not stable and will definitely change in the future!
