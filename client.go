@@ -61,6 +61,19 @@ func (c Client) GetAccountState(accountAddr string) ([]byte, error) {
 	return updateLedgerResponse.GetResponseItems()[0].GetGetAccountStateResponse().GetAccountStateWithProof().GetBlob().GetBlob(), nil
 }
 
+// SendTx sends a transaction to the connected validator node.
+func (c Client) SendTx(tx Transaction) error {
+	txRequest := admission_control.SubmitTransactionRequest{
+		SignedTxn: &types.SignedTransaction{
+			RawTxnBytes:     tx.RawBytes,
+			SenderPublicKey: tx.SenderPubKey,
+			SenderSignature: tx.SenderSig,
+		},
+	}
+	_, err := c.acc.SubmitTransaction(context.Background(), &txRequest)
+	return err
+}
+
 // Close closes the underlying gRPC connection.
 func (c Client) Close() {
 	c.conn.Close()
