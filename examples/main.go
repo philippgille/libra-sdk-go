@@ -20,5 +20,7 @@ func main() {
 		panic(err)
 	}
 
-	fmt.Printf("Account state: 0x%x", accState)
+	fmt.Printf("Raw account state: 0x%x\n", accState.Blob)
+	fmt.Println()
+	fmt.Printf("Account resource: %v\n", accState.AccountResource)
 }
