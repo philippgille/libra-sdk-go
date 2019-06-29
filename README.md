@@ -5,7 +5,9 @@ libra-sdk-go
 
 Go SDK for the Libra cryptocurrency
 
-> Note: This is work in progress! The API is not stable and will definitely change in the future! This package uses proper semantic versioning though, so you can use vendoring or Go modules to prevent breaking your build.
+> Note: This is work in progress! The API is not stable and will definitely change in the future!  
+> This package uses proper semantic versioning though, so you can use vendoring or Go modules to prevent breaking your build.  
+> The changelog of this package can be viewed [here](CHANGELOG.md)
 
 Features
 --------
