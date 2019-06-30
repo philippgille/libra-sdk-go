@@ -1,7 +1,7 @@
 libra-sdk-go
 ============
 
-[![GoDoc](https://godoc.org/github.com/philippgille/libra-sdk-go?status.svg)](https://godoc.org/github.com/philippgille/libra-sdk-go) [![Go Report Card](https://goreportcard.com/badge/github.com/philippgille/libra-sdk-go)](https://goreportcard.com/report/github.com/philippgille/libra-sdk-go)
+[![GoDoc](https://godoc.org/github.com/philippgille/libra-sdk-go?status.svg)](https://godoc.org/github.com/philippgille/libra-sdk-go) [![Build Status](https://travis-ci.org/philippgille/libra-sdk-go.svg?branch=master)](https://travis-ci.org/philippgille/libra-sdk-go) [![Go Report Card](https://goreportcard.com/badge/github.com/philippgille/libra-sdk-go)](https://goreportcard.com/report/github.com/philippgille/libra-sdk-go)
 
 Go SDK for the Libra cryptocurrency
 
