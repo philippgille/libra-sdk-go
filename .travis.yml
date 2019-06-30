@@ -1,0 +1,15 @@
+git:
+  depth: 1
+
+language: go
+
+go:
+  - "1.11"
+
+before_install:
+  - go version
+  - go env
+
+script:
+  # Build
+  - go build -v ./...
