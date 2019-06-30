@@ -12,7 +12,7 @@ Go SDK for the Libra cryptocurrency
 Features
 --------
 
-- Get account state (raw bytes)
+- Get account state with account resource (balance, auth key, sent and received events count, sequence no)
 - Send transaction (raw bytes)
 
 ### Roadmap
@@ -50,14 +50,18 @@ func main() {
         panic(err)
     }
 
-    fmt.Printf("Account state: 0x%x", accState)
+    fmt.Printf("Raw account state: 0x%x\n", accState.Blob)
+    fmt.Println()
+    fmt.Printf("Account resource: %v\n", accState.AccountResource)
 }
 ```
 
 Currently prints:
 
 ```
-Account state: 0x010000002100000001217da6c6b3e19f1825cfb2676daecce3bf3de03cf26647c78df00b371b25cc9744000000200000008cd377191fe0ef113455c8e8d769f0c0147d5bb618bf195c0af31a05fbfd0969a0acb90300000000010000000000000004000000000000000400000000000000
+Raw account state: 0x010000002100000001217da6c6b3e19f1825cfb2676daecce3bf3de03cf26647c78df00b371b25cc9744000000200000008cd377191fe0ef113455c8e8d769f0c0147d5bb618bf195c0af31a05fbfd0969a0acb90300000000010000000000000004000000000000000400000000000000
+
+Account resource: {"authentication_key": "0x8cd377191fe0ef113455c8e8d769f0c0147d5bb618bf195c0af31a05fbfd0969", "balance": "62500000", "received_events_count": "1", "sent_events_count": "4", "sequence_number": "4"}
 ```
 
 Develop

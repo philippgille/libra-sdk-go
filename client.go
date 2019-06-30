@@ -23,12 +23,10 @@ type Client struct {
 }
 
 // GetAccountState requests the state of the given account.
-// The return value is the raw undecoded slice of bytes.
-// No proof is validated.
-func (c Client) GetAccountState(accountAddr string) ([]byte, error) {
+func (c Client) GetAccountState(accountAddr string) (AccountState, error) {
 	accountAddrBytes, err := hex.DecodeString(accountAddr)
 	if err != nil {
-		return nil, err
+		return AccountState{}, err
 	}
 	// From the generated Go code:
 	//
@@ -54,11 +52,13 @@ func (c Client) GetAccountState(accountAddr string) ([]byte, error) {
 	}
 	updateLedgerResponse, err := c.acc.UpdateToLatestLedger(context.Background(), &updateLedgerRequest)
 	if err != nil {
-		return nil, err
+		return AccountState{}, err
 	}
 
 	// We only put one request item in the request, so there should only be one response.
-	return updateLedgerResponse.GetResponseItems()[0].GetGetAccountStateResponse().GetAccountStateWithProof().GetBlob().GetBlob(), nil
+	accStateBlob := updateLedgerResponse.GetResponseItems()[0].GetGetAccountStateResponse().GetAccountStateWithProof().GetBlob().GetBlob()
+
+	return FromAccountStateBlob(accStateBlob)
 }
 
 // SendTx sends a transaction to the connected validator node.
