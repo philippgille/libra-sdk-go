@@ -13,3 +13,5 @@ before_install:
 script:
   # Build
   - go build -v ./...
+  # Run tests
+  - go test -v -race .
