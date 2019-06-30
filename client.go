@@ -44,8 +44,7 @@ func (c Client) GetAccountState(accountAddr string) (AccountState, error) {
 			},
 		},
 	}
-	var knownVersion uint64
-	knownVersion = 0 // TODO: Does this make a difference for accounts? Or only for events? Might need to be a method parameter.
+	knownVersion := uint64(0) // TODO: Does this make a difference for accounts? Or only for events? Might need to be a method parameter.
 	updateLedgerRequest := types.UpdateToLatestLedgerRequest{
 		ClientKnownVersion: knownVersion,
 		RequestedItems:     requestedItems,
@@ -83,7 +82,11 @@ func (c Client) Close() {
 // It connects to the given validator node via gRPC.
 // The connection is kept open until Close() is called on the client.
 func NewClient(address string, dialTimeout time.Duration) (Client, error) {
-	conn, err := grpc.Dial(address, grpc.WithTimeout(dialTimeout), grpc.WithInsecure())
+	ctxWithTimeout, cancelFunc := context.WithTimeout(context.Background(), dialTimeout)
+	defer cancelFunc()
+	// We need the grpc.WithBlock() dial option so that the timeout is used for establishing the connection
+	// and calling the cancel function via defer doesn't lead to cancelling the connection before the timeout.
+	conn, err := grpc.DialContext(ctxWithTimeout, address, grpc.WithBlock(), grpc.WithInsecure())
 	if err != nil {
 		return Client{}, err
 	}
