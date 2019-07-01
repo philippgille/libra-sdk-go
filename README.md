@@ -17,7 +17,6 @@ Features
 
 ### Roadmap
 
-- Instead of returning the undecoded bytes, a proper account state object will be returned in the future
 - Instead of the current `Transaction` struct that only takes `RawBytes`, a higher level transaction struct will be added with fields for the sender and receiver address as well as amount of Libra Coins to send.
 - A wallet package will be added that can read a recovery file or take a recovery seed string and create accounts with their public/private keypairs from that
 - And much more...
