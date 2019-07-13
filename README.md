@@ -66,7 +66,7 @@ Account resource: {"authentication_key": "0x8cd377191fe0ef113455c8e8d769f0c0147d
 Develop
 -------
 
-The proto files are taken from the [Libra repository](https://github.com/libra/libra), commit `bd8e6dc5434d39bd6b56a3502076353d0787a7ef`.
+The proto files are taken from the [Libra repository](https://github.com/libra/libra), commit `4e27604264bd0a5d6c64427f738cbc84d9258a61`.
 
 For updating the `rpc` package you currently need to manually update the proto files, make some changes (e.g. `go_package` option) and then run the Go code generation script: `scripts/generate_rpc.sh`
 

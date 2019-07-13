@@ -14,6 +14,7 @@ vNext
   - New function: `libra.FromAccountStateBlob(accountStateBlob []byte) (AccountState, error)` decodes an account state blob into a `libra.AccountState`
   - New function: `libra.FromAccountResourceBlob(accountResourceBlob []byte) (AccountResource, error)` decodes an account resource blob into a `libra.AccountResource`
 - Improved: `Client.GetAccountState(accountAddr string)` now returns an object of the newly added `libra.AccountState`
+- Improved: Updated gRPC definition files and generated Go code to Libra commit `4e27604264bd0a5d6c64427f738cbc84d9258a61`
 
 ### Breaking Changes
 
