@@ -101,8 +101,11 @@ type AccountResource struct {
 
 // String formats the account state similarly to the Libra CLI.
 // Numbers are formatted as string because the numbers are uint64,
-// whose max value exceeds JSON's "save integer",
+// whose max value exceeds JSON's "safe integer",
 // which can lead to parsing errors.
+//
+// Info about JSON's "safe integer":
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER
 func (ar AccountResource) String() string {
 	return fmt.Sprintf("{\"authentication_key\": \"0x%x\", \"balance\": \"%d\", \"received_events_count\": \"%d\", \"sent_events_count\": \"%d\", \"sequence_number\": \"%d\"}",
 		ar.AuthKey, ar.Balance, ar.ReceivedEvents, ar.SentEvents, ar.SequenceNo)
