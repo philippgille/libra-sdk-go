@@ -24,12 +24,10 @@ func main() {
 	fmt.Println()
 	fmt.Printf("Account resource: %v\n", accState.AccountResource)
 
-	txlist, err := c.GetTransactionList()
+	txlist, err := c.GetTransactionList(1)
 	if err != nil {
 		panic(err)
 	}
-
-	fmt.Printf("Raw account state: 0x%x\n", txlist.Blob)
 	fmt.Println()
-	fmt.Printf("Transaction list resource: %v\n", txlist.TransactionListResource)
+	fmt.Printf("Transaction list resource: %v\n", txlist.Transactions)
 }
