@@ -61,7 +61,7 @@ func (c Client) GetAccountState(accountAddr string) (AccountState, error) {
 }
 
 // GetTransactionList
-func (c Client) GetTransactionList() (TransactionList, error) {
+func (c Client) GetTransactionList(limit int) (TransactionList, error) {
 	// Types that are valid to be assigned to RequestedItems:
 	//	*RequestItem_GetAccountStateRequest
 	//	*RequestItem_GetAccountTransactionBySequenceNumberRequest
@@ -72,7 +72,7 @@ func (c Client) GetTransactionList() (TransactionList, error) {
 			RequestedItems: &types.RequestItem_GetTransactionsRequest{
 				GetTransactionsRequest: &types.GetTransactionsRequest{
 					StartVersion: 1,
-					Limit:        3,
+					Limit:        uint64(limit),
 					FetchEvents:  true,
 				},
 			},
@@ -88,12 +88,9 @@ func (c Client) GetTransactionList() (TransactionList, error) {
 		return TransactionList{}, err
 	}
 
-	txListBlob := updateLedgerResponse.GetResponseItems()[0].GetGetTransactionsResponse().GetTxnListWithProof().GetInfos()
+	txList := updateLedgerResponse.GetResponseItems()[0].GetGetTransactionsResponse().GetTxnListWithProof().GetTransactions()
 
-	// just used as a placeholder
-	if txListBlob != nil {
-	}
-	return TransactionList{}, err
+	return FromTransactionList(txList)
 }
 
 // SendTx sends a transaction to the connected validator node.

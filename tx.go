@@ -4,6 +4,8 @@ import (
 	"bytes"
 	"encoding/binary"
 	"fmt"
+
+	"github.com/philippgille/libra-sdk-go/rpc/types"
 )
 
 // Transaction is a transaction of Libra Coins.
@@ -15,9 +17,7 @@ type Transaction struct {
 
 // TransactionList
 type TransactionList struct {
-	// The whole account state as raw bytes
-	Blob                    []byte
-	TransactionListResource TransactionListResource
+	Transactions []Transaction
 }
 
 // FromTransactionListResourceBlob
@@ -49,15 +49,20 @@ type TransactionListResource struct {
 // Numbers are formatted as string because the numbers are uint64,
 // whose max value exceeds JSON's "save integer",
 // which can lead to parsing errors.
-func (ar TransactionListResource) String() string {
-	return fmt.Sprintf("{\"var_1\": \"0x%x\" }",
-		ar.AuthKey)
+func (tx Transaction) String() string {
+	return fmt.Sprintf("{\"raw_bytes\": \"0x%x\", \"sender_pub_key\": \"0x%x\", \"sender_sig\": \"0x%x\"}",
+		tx.RawBytes, tx.SenderPubKey, tx.SenderSig)
 }
 
 // FromAccountStateBlob converts an account state blob into an object of the AccountState struct.
-func FromTransactionListBlob(transactionListBlob []byte) (TransactionList, error) {
-	result := TransactionList{
-		Blob: transactionListBlob,
+func FromTransactionList(transactionList []*types.SignedTransaction) (TransactionList, error) {
+	results := TransactionList{}
+	for _, x := range transactionList {
+		result := Transaction{}
+		result.RawBytes = x.GetRawTxnBytes()
+		result.SenderPubKey = x.GetSenderPublicKey()
+		result.SenderSig = x.GetSenderSignature()
+		results.Transactions = append(results.Transactions, result)
 	}
-	return result, nil
+	return results, nil
 }
