@@ -60,6 +60,39 @@ func (c Client) GetAccountState(accountAddr string) (AccountState, error) {
 	return FromAccountStateBlob(accStateBlob)
 }
 
+// GetTransactionList
+func (c Client) GetTransactionList(limit int) (TransactionList, error) {
+	// Types that are valid to be assigned to RequestedItems:
+	//	*RequestItem_GetAccountStateRequest
+	//	*RequestItem_GetAccountTransactionBySequenceNumberRequest
+	//	*RequestItem_GetEventsByEventAccessPathRequest
+	//	*RequestItem_GetTransactionsRequest
+	requestedItems := []*types.RequestItem{
+		&types.RequestItem{
+			RequestedItems: &types.RequestItem_GetTransactionsRequest{
+				GetTransactionsRequest: &types.GetTransactionsRequest{
+					StartVersion: 1,
+					Limit:        uint64(limit),
+					FetchEvents:  true,
+				},
+			},
+		},
+	}
+	knownVersion := uint64(0) // TODO: Does this make a difference for accounts? Or only for events? Might need to be a method parameter.
+	updateLedgerRequest := types.UpdateToLatestLedgerRequest{
+		ClientKnownVersion: knownVersion,
+		RequestedItems:     requestedItems,
+	}
+	updateLedgerResponse, err := c.acc.UpdateToLatestLedger(context.Background(), &updateLedgerRequest)
+	if err != nil {
+		return TransactionList{}, err
+	}
+
+	txList := updateLedgerResponse.GetResponseItems()[0].GetGetTransactionsResponse().GetTxnListWithProof().GetTransactions()
+
+	return FromTransactionList(txList)
+}
+
 // SendTx sends a transaction to the connected validator node.
 func (c Client) SendTx(tx Transaction) error {
 	txRequest := admission_control.SubmitTransactionRequest{
